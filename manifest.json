@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "rubar.keyboard-layout",
+  "name": "Keyboard Switcher",
+  "version": "1.0.0",
+  "author": "rubar",
+  "license": "MIT",
+  "description": "Windows/macOS-style language switcher: click-to-pick panel, per-window memory, OSD flash",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Keyboard Switcher",
+    "description": "Language switcher with panel, per-window memory, and OSD",
+    "category": "Compositor",
+    "defaultSection": "right",
+    "allowMultiple": false,
+    "defaults": {
+      "rememberWindows": false
+    },
+    "schema": [
+      {
+        "key": "rememberWindows",
+        "type": "boolean",
+        "label": "Remember layout per window (restore on focus)"
+      }
+    ]
+  }
+}

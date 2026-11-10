@@ -1,0 +1,14 @@
+{
+  "panel.title": "لوحة المفاتيح",
+  "panel.memory": "تذكر لكل نافذة",
+  "panel.memoryCaption": "استعادة تخطيط كل نافذة عند التركيز عليها",
+  "panel.footer": "Shift+Alt للتبديل · 1–9 لاختيار تخطيط · الزر الأيمن للتدوير",
+  "panel.add": "إضافة تخطيط…",
+  "panel.cancelAdd": "إلغاء",
+  "panel.searchPlaceholder": "ابحث عن التخطيطات…",
+  "panel.noResults": "لا توجد تخطيطات مطابقة",
+  "panel.remove": "إزالة التخطيط",
+  "panel.addDuplicate": "موجود بالفعل في تخطيطاتك",
+  "panel.removeBlocked": "تعذر الإزالة: يجب بقاء تخطيط واحد",
+  "panel.applyFailed": "تعذر تحديث قائمة التخطيطات"
+}

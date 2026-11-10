@@ -1,0 +1,14 @@
+{
+  "panel.title": "Keyboard",
+  "panel.memory": "Remember per window",
+  "panel.memoryCaption": "Restore each window's layout on focus",
+  "panel.footer": "Shift+Alt switches · 1–9 picks a layout · right-click cycles",
+  "panel.add": "Add layout…",
+  "panel.cancelAdd": "Cancel",
+  "panel.searchPlaceholder": "Search layouts…",
+  "panel.noResults": "No layouts match",
+  "panel.remove": "Remove layout",
+  "panel.addDuplicate": "Already in your layouts",
+  "panel.removeBlocked": "Can't remove: one layout must stay",
+  "panel.applyFailed": "Could not update the layout list"
+}
