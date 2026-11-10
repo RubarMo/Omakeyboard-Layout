@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "rubar.keyboard-layout",
-  "name": "Keyboard Switcher",
+  "id": "rubar.omakeyboard-layout",
+  "name": "Omakeyboard Layout",
   "version": "1.0.0",
   "author": "rubar",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "barWidget": "BarWidget.qml"
   },
   "barWidget": {
-    "displayName": "Keyboard Switcher",
+    "displayName": "Omakeyboard Layout",
     "description": "Language switcher with panel, per-window memory, and OSD",
     "category": "Compositor",
     "defaultSection": "right",

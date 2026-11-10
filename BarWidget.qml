@@ -13,7 +13,7 @@ import "LayoutModel.js" as LayoutModel
 // right-click and scroll to cycle, optional per-window memory.
 BarWidget {
   id: root
-  moduleName: "rubar.keyboard-layout"
+  moduleName: "rubar.omakeyboard-layout"
 
   // ---- seat reading (ported from the stock widget) -------------------------
   property string layoutFull: ""
@@ -59,13 +59,13 @@ BarWidget {
 
   function persistSettings(values) {
     if (!root.bar || !root.bar.shell || typeof root.bar.shell.updateEntryInline !== "function") return
-    var entry = { id: "rubar.keyboard-layout" }
+    var entry = { id: "rubar.omakeyboard-layout" }
     for (var key in root.settings) if (key !== "id") entry[key] = root.settings[key]
     for (var k in values) entry[k] = values[k]
     // Optimistic local apply so the switch flips on the click itself; the
     // shell.json write comes back through the bar as the same value.
     root.settings = entry
-    root.bar.shell.updateEntryInline("rubar.keyboard-layout", entry)
+    root.bar.shell.updateEntryInline("rubar.omakeyboard-layout", entry)
   }
 
   // ---- MRU: jump back to the last layout instead of stepping forward --------
@@ -75,7 +75,7 @@ BarWidget {
   // windowKey -> layout index. Persisted to a state file so it survives shell
   // restarts. Debounced on focus so Alt-Tab bursts don't thrash.
   property var windowMemory: ({})
-  property string memoryPath: Quickshell.env("HOME") + "/.local/state/omarchy/keyboard-switcher.json"
+  property string memoryPath: Quickshell.env("HOME") + "/.local/state/omarchy/omakeyboard-layout.json"
   property string pendingWindowKey: ""
   property string pendingWindowApp: ""
 
@@ -233,7 +233,7 @@ BarWidget {
   // ---- layout add/remove ---------------------------------------------------------
   // The seat's list lives in ~/.config/hypr/input.lua (kb_layout/kb_variant);
   // a helper script rewrites those lines and reloads Hyprland live.
-  readonly property string applyScript: Quickshell.env("HOME") + "/.config/omarchy/plugins/rubar.keyboard-layout/layouts-apply.py"
+  readonly property string applyScript: Quickshell.env("HOME") + "/.config/omarchy/plugins/rubar.omakeyboard-layout/layouts-apply.py"
   property string catalogError: ""
   property bool searching: false
   property string searchQuery: ""
@@ -314,7 +314,7 @@ BarWidget {
     stderr: StdioCollector { id: applyErr; waitForEnd: true }
     onExited: function (code) {
       if (code !== 0) {
-        root.catalogError = String(applyErr.text || "").replace(/^keyboard-switcher:\s*/, "").trim()
+        root.catalogError = String(applyErr.text || "").replace(/^omakeyboard-layout:\s*/, "").trim()
           || strings.t("panel.applyFailed")
         return
       }
@@ -419,7 +419,7 @@ BarWidget {
   readonly property color barForeground: bar ? bar.barForeground : Commons.Color.foreground
 
   ShellIpc {
-    target: "rubar.keyboard-layout"
+    target: "rubar.omakeyboard-layout"
     function toggle(): void { root.togglePanel() }
     function open(): void { root.openPanel() }
     function close(): void { root.close() }

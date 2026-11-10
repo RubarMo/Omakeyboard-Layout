@@ -1,4 +1,4 @@
-# Keyboard Switcher
+# Omakeyboard Layout
 
 A Windows/macOS-style language switcher for the Omarchy bar — and better.
 Click the pill for a full layout list, right-click or scroll to cycle,
@@ -23,14 +23,14 @@ Click the pill for a full layout list, right-click or scroll to cycle,
 ## Install
 
 ```bash
-omarchy plugin add https://github.com/RubarMo/keyboard-switcher.git --enable
+omarchy plugin add https://github.com/RubarMo/Omakeyboard-Layout.git --enable
 ```
 
 Optional: summon the panel from the keyboard by adding to
 `~/.config/hypr/bindings.lua`:
 
 ```lua
-o.bind("SUPER + SHIFT + L", "Keyboard switcher", "omarchy-shell -q rubar.keyboard-layout toggle")
+o.bind("SUPER + SHIFT + L", "Keyboard switcher", "omarchy-shell -q rubar.omakeyboard-layout toggle")
 ```
 
 ## Usage
@@ -51,9 +51,9 @@ layout list switch together) and resolves friendly names from
 in `~/.config/hypr/input.lua`, refuses non-Latin lead layouts (they would
 break Super bindings), and reloads Hyprland with config-error checking.
 
-Per-window memory lives in `~/.local/state/omarchy/keyboard-switcher.json`,
+Per-window memory lives in `~/.local/state/omarchy/omakeyboard-layout.json`,
 so window churn never dirties your config. Settings persist inline in
-`shell.json` under the `rubar.keyboard-layout` entry.
+`shell.json` under the `rubar.omakeyboard-layout` entry.
 
 ## Requirements
 
@@ -63,7 +63,7 @@ so window churn never dirties your config. Settings persist inline in
 ## Remove
 
 ```bash
-omarchy plugin remove rubar.keyboard-layout
+omarchy plugin remove rubar.omakeyboard-layout
 ```
 
 ## License

@@ -21,7 +21,7 @@ def run(args):
 
 
 def fail(message):
-    print(f"keyboard-switcher: {message}", file=sys.stderr)
+    print(f"omakeyboard-layout: {message}", file=sys.stderr)
     raise SystemExit(1)
 
 
