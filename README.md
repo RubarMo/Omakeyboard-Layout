@@ -23,7 +23,7 @@ Click the pill for a full layout list, right-click or scroll to cycle,
 ## Install
 
 ```bash
-omarchy plugin add https://github.com/rubar/keyboard-switcher.git --enable
+omarchy plugin add https://github.com/RubarMo/keyboard-switcher.git --enable
 ```
 
 Optional: summon the panel from the keyboard by adding to
