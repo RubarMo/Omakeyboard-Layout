@@ -44,12 +44,23 @@ o.bind("SUPER + SHIFT + L", "Keyboard switcher", "omarchy-shell -q rubar.omakeyb
 
 ## How it works
 
-Reads the live seat via `hyprctl -j devices` (all keyboards sharing the
-layout list switch together) and resolves friendly names from
-`xkbcli list --load-exotic`. Layout adds/removes go through
-`layouts-apply.py`, which rewrites the active `kb_layout`/`kb_variant` lines
-in `~/.config/hypr/input.lua`, refuses non-Latin lead layouts (they would
+Reads the live seat via `hyprctl -j devices` and resolves friendly names from
+`xkbcli list --load-exotic`. A layout switch is one argv call,
+`hyprctl switchxkblayout all <index>`: Hyprland applies the switch to the
+seat's keyboards and no device name is ever interpolated into the command. Layout adds/removes go
+through `layouts-apply.py`, which rewrites the active `kb_layout`/`kb_variant`
+lines in `~/.config/hypr/input.lua`, refuses non-Latin lead layouts (they would
 break Super bindings), and reloads Hyprland with config-error checking.
+
+### Security
+
+Keyboard names are attacker-controlled: a physical keyboard chooses the name
+Hyprland reports, and `hyprctl` interprets a name beginning with `-` as an
+option (including `--batch`). The widget therefore never passes a device name
+to `hyprctl` or a shell. Switches use Hyprland's constant `all` target and a
+validated numeric index through `Quickshell.execDetached` (an argv vector, not
+a shell string), so a denied or pending keyboard cannot inject a command when
+the owner switches layouts.
 
 Per-window memory lives in `~/.local/state/omarchy/omakeyboard-layout.json`,
 so window churn never dirties your config. Settings persist inline in

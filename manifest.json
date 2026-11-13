@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "rubar.omakeyboard-layout",
   "name": "Omakeyboard Layout",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "rubar",
   "license": "MIT",
   "description": "Windows/macOS-style language switcher: click-to-pick panel, per-window memory, OSD flash",

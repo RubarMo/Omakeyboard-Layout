@@ -25,7 +25,6 @@ BarWidget {
   property int layoutCount: 0
   property var layoutCodes: []
   property string layoutVariants: ""
-  property var syncNames: []
   property var layoutBriefs: ({})
   property var layoutDescriptions: ({})
   property bool layoutsRead: false
@@ -157,11 +156,17 @@ BarWidget {
   }
 
   // ---- switching ---------------------------------------------------------------
+  // Device names are attacker-controlled: a USB keyboard can choose its own name,
+  // and hyprctl interprets names that start with "-" as options (including
+  // --batch). Hyprland treats "all"/"main"/"active"/"current" as special targets
+  // too. So never interpolate a device name into the switch: "all" is a constant
+  // Hyprland target and the index is forced to an integer here. The argv call also
+  // avoids a shell entirely.
   function runSwitch(index) {
-    if (!root.bar || layoutCount < 2 || syncNames.length === 0) return
-    root.bar.run(syncNames.map(function (name) {
-      return "hyprctl switchxkblayout " + Util.shellQuote(name) + " " + index
-    }).join("; "))
+    if (layoutCount < 2) return
+    var target = Math.floor(Number(index))
+    if (!isFinite(target) || target < 0 || target >= layoutCount) return
+    Quickshell.execDetached(["hyprctl", "switchxkblayout", "all", String(target)])
     refreshTimer.restart()
   }
 
@@ -177,7 +182,8 @@ BarWidget {
   }
 
   function setLayout(index, why) {
-    if (index < 0 || index >= layoutCount) return
+    index = Math.floor(Number(index))
+    if (!isFinite(index) || index < 0 || index >= layoutCount) return
     if (index === layoutIndex && why !== "panel") {
       // Already there; still record MRU freshness.
       recentLayouts = LayoutModel.pushRecent(recentLayouts, index, layoutCount)
@@ -526,9 +532,6 @@ BarWidget {
         root.layoutVariants = String(kb.variant === undefined || kb.variant === null ? "" : kb.variant)
         root.layoutIndex = kb.active_layout_index || 0
         root.layoutCount = kb.layout === undefined ? 0 : root.layoutCodes.length
-        root.syncNames = listed.filter(function (k) { return String(k.layout) === String(kb.layout) })
-                               .map(function (k) { return String(k.name || "") })
-                               .filter(function (name) { return name !== "" })
         root.layoutFull = kb.active_keymap
         if (prevIndex !== root.layoutIndex) {
           recentLayouts = LayoutModel.pushRecent(recentLayouts, root.layoutIndex, Math.max(1, root.layoutCount))
